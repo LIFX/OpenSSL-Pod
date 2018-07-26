@@ -1,18 +1,18 @@
 Pod::Spec.new do |s|
   s.name            = "OpenSSL"
-  s.version         = "1.0.109"
-  s.summary         = "OpenSSL is an SSL/TLS and Crypto toolkit. Deprecated in Mac OS and gone in iOS, this spec gives your project non-deprecated OpenSSL support."
+  s.version         = "REPLACE_HERE"
+  s.summary         = "OpenSSL is an SSL/TLS and Crypto toolkit. Deprecated in Mac OS and gone in iOS, this spec gives your project non-deprecated OpenSSL support.Fork from FredericJacobs's repo"
   s.author          = "OpenSSL Project <openssl-dev@openssl.org>"
 
-  s.homepage        = "https://github.com/FredericJacobs/OpenSSL-Pod"
-  s.license         = 'BSD-style Open Source'
-  s.source          = { :http => "https://www.openssl.org/source/openssl-1.0.1i.tar.gz", :sha1 => "74eed314fa2c93006df8d26cd9fc630a101abd76"}
+  s.homepage        = "https://github.com/LIFX/OpenSSL-Pod"
+  s.source          = { :http => "https://openssl.org/source/openssl-REPLACE_HERE.tar.gz", :sha1 => "REPLACE_HERE"}
   s.source_files    = "opensslIncludes/openssl/*.h"
   s.header_dir      = "openssl"
-  s.license	        = { :type => 'OpenSSL (OpenSSL/SSLeay)', :file => 'LICENSE' }
+  s.license         = { :type => 'OpenSSL (OpenSSL/SSLeay)', :file => 'LICENSE' }
 
   s.prepare_command = <<-CMD
-    VERSION="1.0.2j"
+    echo "Starting to prepare OpenSSL, this will take a few minutes"
+    VERSION="REPLACE_HERE"
     SDKVERSION=`xcrun --sdk iphoneos --show-sdk-version 2> /dev/null`
     MIN_SDK_VERSION_FLAG="-miphoneos-version-min=7.0"
     BASEPATH="${PWD}"
@@ -24,8 +24,11 @@ Pod::Spec.new do |s|
     cp -rf "${BASEPATH}/" "${CURRENTPATH}/openssl-${VERSION}"
     cd "${CURRENTPATH}"
     cd "openssl-${VERSION}"
+    echo "Working directory prepared"
+
     for ARCH in ${ARCHS}
     do
+      echo "Preparing build for ${ARCH}"
       CONFIGURE_FOR="iphoneos-cross"
       if [ "${ARCH}" == "i386" ] || [ "${ARCH}" == "x86_64" ] ;
       then
